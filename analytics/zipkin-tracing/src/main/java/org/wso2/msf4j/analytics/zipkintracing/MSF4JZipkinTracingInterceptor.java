@@ -30,7 +30,6 @@ import org.wso2.msf4j.Interceptor;
 import org.wso2.msf4j.Request;
 import org.wso2.msf4j.Response;
 import org.wso2.msf4j.ServiceMethodInfo;
-import org.wso2.msf4j.analytics.common.tracing.TracingConstants;
 
 /**
  * Interceptor for tracing server side request/response flows to Zipkin.
@@ -40,6 +39,7 @@ public class MSF4JZipkinTracingInterceptor implements Interceptor {
     private final ServerRequestInterceptor reqInterceptor;
     private final ServerResponseInterceptor respInterceptor;
     private static final String RESPONDER_ATTRIBUTE = "responder-attribute";
+    private static final String DEFAULT_ZIPKIN_URL = "http://0.0.0.0:9411";
 
     /**
      * Constructor of the MSF4JTracingInterceptor.
@@ -47,7 +47,7 @@ public class MSF4JZipkinTracingInterceptor implements Interceptor {
      * @param microServiceName Name of the Microservice
      */
     public MSF4JZipkinTracingInterceptor(String microServiceName) {
-        this(microServiceName, TracingConstants.DEFAULT_ZIPKIN_URL);
+        this(microServiceName, DEFAULT_ZIPKIN_URL);
     }
 
     /**

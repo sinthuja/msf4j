@@ -18,7 +18,6 @@ package org.wso2.msf4j.example.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.msf4j.analytics.common.tracing.TracingConstants;
 import org.wso2.msf4j.client.MSF4JClient;
 import org.wso2.msf4j.example.client.api.CustomerServiceAPI;
 import org.wso2.msf4j.example.client.api.InvoiceServiceAPI;
@@ -56,7 +55,7 @@ public class ReportService {
         customerServiceClient = new MSF4JClient.Builder<CustomerServiceAPI>()
                 .apiClass(CustomerServiceAPI.class)
                 .enableTracing()
-                .tracingType(TracingConstants.TracingType.OPEN_TRACING)
+                .tracingType("OPEN_TRACING")
                 .instanceName("CustomerServiceClient")
                 .serviceEndpoint(CUSTOMER_SERVICE_URL)
                 .addErrorResponseMapper(new CustomerNotFoundResponseMapper())
@@ -65,7 +64,7 @@ public class ReportService {
         invoiceServiceClient = new MSF4JClient.Builder<InvoiceServiceAPI>()
                 .apiClass(InvoiceServiceAPI.class)
                 .enableTracing()
-                .tracingType(TracingConstants.TracingType.OPEN_TRACING)
+                .tracingType("OPEN_TRACING")
                 .instanceName("InvoiceServiceClient")
                 .serviceEndpoint(INVOICE_SERVICE_URL)
                 .addErrorResponseMapper(new InvoiceNotFoundResponseMapper())

@@ -16,7 +16,7 @@
 
 package org.wso2.msf4j.example;
 
-import org.wso2.msf4j.analytics.common.tracing.TracingConstants;
+import org.wso2.msf4j.das.analytics.tracing.TracingConstants;
 import org.wso2.msf4j.client.MSF4JClient;
 import org.wso2.msf4j.client.codec.MSF4JDecoder;
 
@@ -36,7 +36,7 @@ public class TraceableService {
             .apiClass(TraceableServiceInterface.class)
             .enableTracing()
             .decoder(new MSF4JDecoder())
-            .tracingType(TracingConstants.TracingType.ZIPKIN)
+            .tracingType("ZIPKIN")
             .instanceName("TraceableServiceClient")
             .analyticsEndpoint("http://localhost:9411")
             .serviceEndpoint("http://localhost:8080")

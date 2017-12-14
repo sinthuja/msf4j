@@ -17,8 +17,8 @@
 package org.wso2.msf4j.examples.petstore.fileserver;
 
 import org.wso2.msf4j.MicroservicesRunner;
-import org.wso2.msf4j.analytics.httpmonitoring.HTTPMonitoringInterceptor;
-import org.wso2.msf4j.analytics.metrics.MetricsInterceptor;
+import org.wso2.msf4j.das.analytics.httpmonitoring.HTTPMonitoringInterceptor;
+import org.wso2.msf4j.metrics.MetricsInterceptor;
 
 /**
  * Microservice runner for file server

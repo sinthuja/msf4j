@@ -20,10 +20,10 @@ import feign.Request;
 import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.msf4j.analytics.common.tracing.TraceEvent;
-import org.wso2.msf4j.analytics.common.tracing.TracingConstants;
-import org.wso2.msf4j.analytics.common.tracing.TracingEventTracker;
-import org.wso2.msf4j.analytics.common.tracing.TracingUtil;
+import org.wso2.msf4j.das.analytics.tracing.TraceEvent;
+import org.wso2.msf4j.das.analytics.tracing.TracingConstants;
+import org.wso2.msf4j.das.analytics.tracing.TracingEventTracker;
+import org.wso2.msf4j.das.analytics.tracing.TracingUtil;
 
 import java.io.IOException;
 import java.util.Collection;

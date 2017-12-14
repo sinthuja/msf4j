@@ -18,12 +18,12 @@
 package org.wso2.msf4j.example.opentracing;
 
 import io.opentracing.propagation.TextMap;
-import org.wso2.carbon.messaging.Header;
-import org.wso2.carbon.messaging.Headers;
 import org.wso2.msf4j.Request;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.HttpHeaders;
 
 public class MS4JRequestExtractorAdaptor implements TextMap {
     private Request request;
@@ -43,10 +43,10 @@ public class MS4JRequestExtractorAdaptor implements TextMap {
     }
 
     private class RequestIterator implements Iterator<Map.Entry<String, String>> {
-        private Iterator<Header> iterator;
+        private Iterator<Map.Entry<String, List<String>>> iterator;
 
-        private RequestIterator(Headers headers) {
-            this.iterator = headers.getAll().iterator();
+        private RequestIterator(HttpHeaders headers) {
+            this.iterator = headers.getRequestHeaders().entrySet().iterator();
         }
 
         @Override
@@ -56,8 +56,8 @@ public class MS4JRequestExtractorAdaptor implements TextMap {
 
         @Override
         public Map.Entry<String, String> next() {
-            Header header = this.iterator.next();
-            return new HeaderEntry(header.getName(), header.getValue());
+            Map.Entry<String, List<String>> header = this.iterator.next();
+            return new HeaderEntry(header.getKey(), header.getValue().get(0));
         }
 
         public class HeaderEntry implements Map.Entry<String, String> {

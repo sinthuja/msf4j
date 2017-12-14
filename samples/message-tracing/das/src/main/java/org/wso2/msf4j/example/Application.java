@@ -17,7 +17,7 @@
 package org.wso2.msf4j.example;
 
 import org.wso2.msf4j.MicroservicesRunner;
-import org.wso2.msf4j.analytics.tracing.MSF4JTracingInterceptor;
+import org.wso2.msf4j.das.analytics.tracing.MSF4JTracingInterceptor;
 import org.wso2.msf4j.example.exception.CustomerNotFoundMapper;
 import org.wso2.msf4j.example.exception.EntityNotFoundMapper;
 import org.wso2.msf4j.example.exception.GenericServerErrorMapper;

@@ -18,7 +18,7 @@ package org.wso2.msf4j.sample.metrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wso2.msf4j.MicroservicesRunner;
-import org.wso2.msf4j.analytics.metrics.MetricsInterceptor;
+import org.wso2.msf4j.metrics.MetricsInterceptor;
 import org.wso2.msf4j.sample.metrics.service.DemoService;
 
 /**

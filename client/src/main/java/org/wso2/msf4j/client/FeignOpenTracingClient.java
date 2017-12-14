@@ -64,7 +64,8 @@ public class FeignOpenTracingClient implements Client {
         this.tracer.inject(requestSpan.context(), Format.Builtin.HTTP_HEADERS, requestInjectorAdaptor);
 
         Request wrappedRequest =
-                Request.create(request.method(), request.url(), requestInjectorAdaptor.getHeaders(), request.body(), request.charset());
+                Request.create(request.method(), request.url(), requestInjectorAdaptor.getHeaders(),
+                        request.body(), request.charset());
 
         Response response = clientDelegate.execute(wrappedRequest, options);
 

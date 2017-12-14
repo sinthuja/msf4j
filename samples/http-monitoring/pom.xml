@@ -33,7 +33,11 @@
     <dependencies>
         <dependency>
             <groupId>org.wso2.msf4j</groupId>
-            <artifactId>msf4j-analytics</artifactId>
+            <artifactId>msf4j-das-analytics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.msf4j</groupId>
+            <artifactId>msf4j-metrics</artifactId>
         </dependency>
     </dependencies>
 

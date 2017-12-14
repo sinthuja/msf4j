@@ -16,7 +16,7 @@ Add the msf4j tracing and Open Feign dependencies to the pom of you MSF4J servic
     <dependencies>
         <dependency>
             <groupId>org.wso2.msf4j</groupId>
-            <artifactId>msf4j-analytics</artifactId>
+            <artifactId>msf4j-das-analytics</artifactId>
         </dependency>
         
         <!-- Feign -->

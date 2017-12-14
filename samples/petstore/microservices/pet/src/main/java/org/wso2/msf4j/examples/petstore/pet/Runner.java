@@ -16,8 +16,8 @@
 package org.wso2.msf4j.examples.petstore.pet;
 
 import org.wso2.msf4j.MicroservicesRunner;
-import org.wso2.msf4j.analytics.httpmonitoring.HTTPMonitoringInterceptor;
-import org.wso2.msf4j.analytics.metrics.MetricsInterceptor;
+import org.wso2.msf4j.das.analytics.httpmonitoring.HTTPMonitoringInterceptor;
+import org.wso2.msf4j.metrics.MetricsInterceptor;
 import org.wso2.msf4j.security.JWTSecurityInterceptor;
 
 /**

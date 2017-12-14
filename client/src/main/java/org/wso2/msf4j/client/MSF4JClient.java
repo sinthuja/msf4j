@@ -34,7 +34,6 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wso2.carbon.utils.StringUtils;
-import org.wso2.msf4j.analytics.common.tracing.TracingConstants;
 import org.wso2.msf4j.client.codec.DefaultErrorDecoder;
 import org.wso2.msf4j.client.codec.RestErrorResponseMapper;
 import org.wso2.msf4j.client.exception.RestServiceException;
@@ -43,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -86,7 +86,7 @@ public class MSF4JClient<T> {
         private ErrorDecoder errorDecoder = new DefaultErrorDecoder(errorCodeExceptionMap);
         private Encoder encoder = new GsonEncoder(ModelUtils.GSON);
         private Decoder decoder = new GsonDecoder(ModelUtils.GSON);
-        private TracingConstants.TracingType tracingType = TracingConstants.TracingType.DAS;
+        private TracingType tracingType = TracingType.DAS;
 
         public Feign.Builder newFeignClientBuilder() {
             return Feign.builder()
@@ -173,8 +173,15 @@ public class MSF4JClient<T> {
             return this;
         }
 
-        public MSF4JClient.Builder<T> tracingType(TracingConstants.TracingType tracingType) {
+        public MSF4JClient.Builder<T> tracingType(TracingType tracingType) {
             this.tracingType = tracingType;
+            return this;
+        }
+
+        public MSF4JClient.Builder<T> tracingType(String tracingType) {
+            if (tracingType != null && !tracingType.isEmpty()) {
+                this.tracingType = TracingType.valueOf(tracingType.toUpperCase(Locale.ENGLISH));
+            }
             return this;
         }
 
@@ -230,11 +237,11 @@ public class MSF4JClient<T> {
                     .build();
 
             if (enableTracing) {
-                if (tracingType == TracingConstants.TracingType.ZIPKIN) {
+                if (tracingType == TracingType.ZIPKIN) {
                     client = new FeignClientWrapper(
                             new FeginZipkinTracingClient(new ApacheHttpClient(apacheHttpClient), instanceName,
                                     analyticsEndpoint));
-                } else if (tracingType == TracingConstants.TracingType.DAS) {
+                } else if (tracingType == TracingType.DAS) {
                     client = new FeignClientWrapper(
                             new FeignTracingClient(new ApacheHttpClient(apacheHttpClient), instanceName,
                                     analyticsEndpoint));

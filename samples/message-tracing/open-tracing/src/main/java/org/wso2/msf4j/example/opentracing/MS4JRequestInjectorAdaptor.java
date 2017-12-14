@@ -20,6 +20,7 @@ package org.wso2.msf4j.example.opentracing;
 import io.opentracing.propagation.TextMap;
 import org.wso2.msf4j.Request;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -37,6 +38,6 @@ public class MS4JRequestInjectorAdaptor implements TextMap {
 
     @Override
     public void put(String key, String value) {
-        request.getHeaders().set(key, value);
+        request.getHeaders().getRequestHeaders().put(key, Collections.singletonList(value));
     }
 }

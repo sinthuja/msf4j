@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.wso2.carbon.metrics.core.annotation.Timed;
 import org.wso2.msf4j.HttpStreamHandler;
 import org.wso2.msf4j.HttpStreamer;
-import org.wso2.msf4j.analytics.httpmonitoring.HTTPMonitored;
+import org.wso2.msf4j.das.analytics.httpmonitoring.HTTPMonitored;
 
 import java.io.File;
 import java.io.FileNotFoundException;

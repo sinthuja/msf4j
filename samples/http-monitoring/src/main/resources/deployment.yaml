@@ -15,7 +15,7 @@
   # MSF4J Analytics configuration
 wso2.msf4j.analytics.configuration:
     # Whether HTTP Monitoring is enables or not
-  enabled: false
+  enabled: true
     # DAS configuration
   das:
       # The type used with Data Publisher

@@ -327,12 +327,12 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.msf4j</groupId>
-                <artifactId>msf4j-analytics</artifactId>
+                <artifactId>msf4j-das-analytics</artifactId>
                 <version>${msf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.msf4j</groupId>
-                <artifactId>msf4j-analytics-common</artifactId>
+                <artifactId>msf4j-metrics</artifactId>
                 <version>${msf4j.version}</version>
             </dependency>
             <dependency>
@@ -560,6 +560,16 @@
                 <groupId>org.wso2.carbon.metrics</groupId>
                 <artifactId>org.wso2.carbon.metrics.das.core</artifactId>
                 <version>${carbon.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.databridge.agent</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.databridge.commons</artifactId>
+                <version>${carbon.analytics.common.version}</version>
             </dependency>
             <!-- Metrics Dependencies - End -->
             <!-- Zipkin tracing dependencies - Start -->

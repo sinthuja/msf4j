@@ -32,7 +32,6 @@ import feign.Request;
 import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.msf4j.analytics.common.tracing.TracingConstants;
 import org.wso2.msf4j.analytics.zipkintracing.TraceableHttpClientRequest;
 import org.wso2.msf4j.analytics.zipkintracing.TraceableHttpClientResponse;
 
@@ -49,12 +48,13 @@ public class FeginZipkinTracingClient implements Client {
     private final Client clientDelegate;
     private final ClientRequestInterceptor requestInterceptor;
     private final ClientResponseInterceptor responseInterceptor;
+    private static final String DEFAULT_ZIPKIN_URL = "http://0.0.0.0:9411";
 
     /**
      * Constructor of FeignTracingClient.
      */
     public FeginZipkinTracingClient(Client client, String instanceName) {
-        this(client, instanceName, TracingConstants.DEFAULT_ZIPKIN_URL);
+        this(client, instanceName, DEFAULT_ZIPKIN_URL);
     }
 
     /**
