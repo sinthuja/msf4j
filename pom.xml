@@ -143,6 +143,7 @@
         <module>samples/regex-pathparam</module>
         <module>samples/message-tracing/das/</module>
         <module>samples/message-tracing/zipkin/</module>
+        <module>samples/message-tracing/open-tracing</module>
         <module>samples/subresource</module>
         <module>samples/spring-profile</module>
         <module>samples/interceptor/interceptor-common</module>

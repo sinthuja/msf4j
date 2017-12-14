@@ -36,7 +36,7 @@ public class TracingConstants {
      * Tracing Types.
      */
     public enum TracingType {
-        DAS, ZIPKIN
+        DAS, ZIPKIN, OPEN_TRACING
     }
 
 }

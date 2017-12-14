@@ -224,20 +224,23 @@ public class MSF4JClient<T> {
             cm.setDefaultMaxPerRoute(20);
 
             CloseableHttpClient apacheHttpClient = HttpClients.custom()
-                                                              .setSSLContext(sslContext)
-                                                              .setSSLHostnameVerifier(hostnameVerifier)
-                                                              .setConnectionManager(cm)
-                                                              .build();
+                    .setSSLContext(sslContext)
+                    .setSSLHostnameVerifier(hostnameVerifier)
+                    .setConnectionManager(cm)
+                    .build();
 
             if (enableTracing) {
                 if (tracingType == TracingConstants.TracingType.ZIPKIN) {
                     client = new FeignClientWrapper(
                             new FeginZipkinTracingClient(new ApacheHttpClient(apacheHttpClient), instanceName,
-                                                         analyticsEndpoint));
-                } else {
+                                    analyticsEndpoint));
+                } else if (tracingType == TracingConstants.TracingType.DAS) {
                     client = new FeignClientWrapper(
                             new FeignTracingClient(new ApacheHttpClient(apacheHttpClient), instanceName,
-                                                   analyticsEndpoint));
+                                    analyticsEndpoint));
+                } else {
+                    client = new FeignClientWrapper(new FeignOpenTracingClient(new ApacheHttpClient(apacheHttpClient),
+                            instanceName));
                 }
             } else {
                 client = new FeignClientWrapper(new ApacheHttpClient(apacheHttpClient));
@@ -247,6 +250,7 @@ public class MSF4JClient<T> {
                 HystrixFeign.Builder builder = newHystrixFeignClientBuilder();
                 builder.client(client);
                 builder.requestInterceptors(requestInterceptors);
+
                 builder.errorDecoder(errorDecoder);
                 if (decode404) {
                     builder.decode404();
