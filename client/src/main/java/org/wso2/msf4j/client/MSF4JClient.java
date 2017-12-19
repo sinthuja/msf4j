@@ -37,6 +37,7 @@ import org.wso2.carbon.utils.StringUtils;
 import org.wso2.msf4j.client.codec.DefaultErrorDecoder;
 import org.wso2.msf4j.client.codec.RestErrorResponseMapper;
 import org.wso2.msf4j.client.exception.RestServiceException;
+import org.wso2.msf4j.client.tracing.FeignOpenTracingClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -236,6 +237,11 @@ public class MSF4JClient<T> {
                     .setConnectionManager(cm)
                     .build();
 
+            client = new FeignOpenTracingClient(new ApacheHttpClient(apacheHttpClient),
+                    instanceName);
+
+            //TODO: Remove the below block as the Feign Open tracing client will fall back
+            // to normal client if the tracing is disabled.
             if (enableTracing) {
                 if (tracingType == TracingType.ZIPKIN) {
                     client = new FeignClientWrapper(
@@ -245,9 +251,6 @@ public class MSF4JClient<T> {
                     client = new FeignClientWrapper(
                             new FeignTracingClient(new ApacheHttpClient(apacheHttpClient), instanceName,
                                     analyticsEndpoint));
-                } else {
-                    client = new FeignClientWrapper(new FeignOpenTracingClient(new ApacheHttpClient(apacheHttpClient),
-                            instanceName));
                 }
             } else {
                 client = new FeignClientWrapper(new ApacheHttpClient(apacheHttpClient));

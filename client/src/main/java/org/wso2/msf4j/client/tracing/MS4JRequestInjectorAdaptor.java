@@ -15,7 +15,7 @@
 * under the License.
 *
 */
-package org.wso2.msf4j.client;
+package org.wso2.msf4j.client.tracing;
 
 import feign.Request;
 import io.opentracing.propagation.TextMap;

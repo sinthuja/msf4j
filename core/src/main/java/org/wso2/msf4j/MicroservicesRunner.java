@@ -22,6 +22,7 @@ import org.wso2.msf4j.interceptor.ResponseInterceptor;
 import org.wso2.msf4j.internal.DataHolder;
 import org.wso2.msf4j.internal.HttpConnectorPortBindingListener;
 import org.wso2.msf4j.internal.MSF4JHttpConnectorListener;
+import org.wso2.msf4j.internal.MSF4JInterceptorLoader;
 import org.wso2.msf4j.internal.MSF4JWSConnectorListener;
 import org.wso2.msf4j.internal.MicroservicesRegistryImpl;
 import org.wso2.msf4j.internal.websocket.EndpointsRegistryImpl;
@@ -247,6 +248,9 @@ public class MicroservicesRunner {
     public void start() {
         msRegistry.getSessionManager().init();
         handleServiceLifecycleMethods();
+        MSF4JInterceptorLoader msf4JInterceptorLoader = new MSF4JInterceptorLoader();
+        addGlobalRequestInterceptor(msf4JInterceptorLoader.getRequestInterceptors());
+        addGlobalResponseInterceptor(msf4JInterceptorLoader.getResponseInterceptors());
         MSF4JHttpConnectorListener msf4JHttpConnectorListener = new MSF4JHttpConnectorListener();
         MSF4JWSConnectorListener msf4JWSConnectorListener = new MSF4JWSConnectorListener();
         serverConnectors.forEach(serverConnector -> {

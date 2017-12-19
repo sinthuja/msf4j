@@ -27,13 +27,14 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.wso2.msf4j.internal.MSF4JConstants.DEPLOYMENT_YAML_SYS_PROPERTY;
+
 /**
  * Utils contains utility methods to use analytic purposes
  */
 public class AnalyticUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(AnalyticUtils.class);
-    private static final String DEPLOYMENT_YAML_SYS_PROPERTY = "msf4j.conf";
     private static final String DEPLOYMENT_YAML_FILE = "deployment.yaml";
 
     /**

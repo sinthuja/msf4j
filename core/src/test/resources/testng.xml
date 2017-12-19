@@ -21,6 +21,7 @@ limitations under the License.
 
     <test name="interceptor-unit-tests" preserve-order="true" parallel="false">
         <classes>
+            <class name="org.wso2.msf4j.interceptor.GlobalInterceptorLoaderConfigTest"/>
             <class name="org.wso2.msf4j.InterceptorTest"/>
             <!-- TODO Fix  WMS-82-->
             <!--class name="org.wso2.msf4j.HandlerInterceptorTest" /-->

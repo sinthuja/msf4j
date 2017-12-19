@@ -48,8 +48,8 @@
             <version>0.30.0</version>
         </dependency>
         <dependency>
-            <groupId>com.lightstep.tracer</groupId>
-            <artifactId>lightstep-tracer-jre</artifactId>
+            <groupId>com.lightstep.tracers</groupId>
+            <artifactId>lightstep-tracers-jre</artifactId>
             <version>0.11.0</version>
         </dependency>
         <dependency>

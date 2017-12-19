@@ -220,6 +220,11 @@
                 <version>${carbon.kernel.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.wso2.msf4j</groupId>
+                <artifactId>msf4j-open-tracing</artifactId>
+                <version>${msf4j.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.wso2.carbon.utils</groupId>
                 <artifactId>org.wso2.carbon.utils</artifactId>
                 <version>${carbon.utils.version}</version>

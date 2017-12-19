@@ -21,7 +21,7 @@ import org.wso2.carbon.config.annotation.Element;
 /**
  * Configuration for HTTP Monitoring
  */
-@Configuration(namespace = "wso2.msf4j.analytics.configuration", description = "MSF4J Analytics configuration")
+@Configuration(namespace = "wso2.msf4j.http.monitoring.configuration", description = "MSF4J Analytics configuration")
 public class HTTPMonitoringConfig {
 
     @Element(description = "Whether HTTP Monitoring is enables or not")
