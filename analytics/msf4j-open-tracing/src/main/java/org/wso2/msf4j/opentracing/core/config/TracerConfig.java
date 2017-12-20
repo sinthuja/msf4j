@@ -31,12 +31,17 @@ public class TracerConfig {
     @Element(description = "Whether the tracer is enabled or disabled", required = true)
     private boolean enabled = false;
 
+    @Element(description = "Class name of the tracer implementation of " +
+            "org.wso2.msf4j.opentracing.core.OpenTracer interface", required = true)
+    private String className = "";
+
     @Element(description = "Configuration properties of the tracer")
     private Properties configuration = new Properties();
 
     TracerConfig() {
         this.name = "";
         this.enabled = false;
+        this.className = "";
         this.configuration = new Properties();
     }
 
@@ -62,5 +67,13 @@ public class TracerConfig {
 
     public void setConfiguration(Properties configuration) {
         this.configuration = configuration;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 }

@@ -112,6 +112,7 @@
         <module>analytics/wso2das-tracing-capp</module>
         <module>analytics/zipkin-tracing</module>
         <module>analytics/msf4j-open-tracing</module>
+        <module>analytics/jaeger-tracing</module>
 
         <module>client</module>
 

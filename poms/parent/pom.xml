@@ -589,6 +589,13 @@
                 <version>${zipkin.brave.version}</version>
             </dependency>
             <!-- Zipkin tracing dependencies - End -->
+            <!--Jaeger tracing dependencies - Start-->
+            <dependency>
+                <groupId>com.uber.jaeger</groupId>
+                <artifactId>jaeger-core</artifactId>
+                <version>${jaeger.version}</version>
+            </dependency>
+            <!--Jaeger tracing dependencies - End-->
             <dependency>
                 <groupId>com.nimbusds</groupId>
                 <artifactId>nimbus-jose-jwt</artifactId>
@@ -766,6 +773,7 @@
         <org.apache.httpcomponents.httpclient.version>4.5.2</org.apache.httpcomponents.httpclient.version>
         <msf4j.version>2.5.0-SNAPSHOT</msf4j.version>
         <zipkin.brave.version>3.9.1</zipkin.brave.version>
+        <jaeger.version>0.21.0</jaeger.version>
         <carbon.metrics.version>2.3.2</carbon.metrics.version>
         <carbon.metrics.version.range>[2.0,3)</carbon.metrics.version.range>
         <carbon.analytics.common.version>5.0.6</carbon.analytics.common.version>

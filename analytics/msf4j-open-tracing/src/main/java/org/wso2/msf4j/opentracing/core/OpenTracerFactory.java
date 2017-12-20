@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.wso2.carbon.config.ConfigProviderFactory;
 import org.wso2.carbon.config.ConfigurationException;
 import org.wso2.carbon.config.provider.ConfigProvider;
+import org.wso2.msf4j.opentracing.core.config.InvalidConfigurationException;
 import org.wso2.msf4j.opentracing.core.config.OpenTracingConfig;
 import org.wso2.msf4j.opentracing.core.config.TracerConfig;
 import org.wso2.msf4j.opentracing.core.internal.DataHolder;
@@ -50,26 +51,34 @@ import static org.wso2.msf4j.internal.MSF4JConstants.DEPLOYMENT_YAML_SYS_PROPERT
 public class OpenTracerFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(OpenTracerFactory.class);
-    private static OpenTracerFactory instance = new OpenTracerFactory();
+    private static OpenTracerFactory instance;
     private OpenTracingConfig openTracingConfig;
     private Map<String, Tracer> tracers;
 
     private OpenTracerFactory() {
         try {
-            System.out.println();
             setConfiguration();
             this.tracers = new HashMap<>();
-        } catch (ConfigurationException ex) {
+            loadTracers();
+        } catch (ConfigurationException | IllegalAccessException
+                | InstantiationException | ClassNotFoundException | InvalidConfigurationException ex) {
             logger.error("Error while loading the open tracing configuration, " +
                     "failed to initialize the tracer instance", ex);
         }
     }
 
     public static OpenTracerFactory getInstance() {
+        if (instance == null){
+            synchronized (OpenTracerFactory.class) {
+                if (instance == null) {
+                    instance = new OpenTracerFactory();
+                }
+            }
+        }
         return instance;
     }
 
-    public boolean isTracingEnabled(){
+    public boolean isTracingEnabled() {
         return !this.tracers.isEmpty();
     }
 
@@ -77,10 +86,23 @@ public class OpenTracerFactory {
         return this.openTracingConfig.getTracer(tracerName);
     }
 
-    public synchronized void register(String tracerName, Tracer tracer) {
+    private void register(String tracerName, Tracer tracer) {
         TracerConfig tracerConfig = getTracingConfig(tracerName);
         if (tracerConfig.isEnabled() && this.tracers.get(tracerName.toLowerCase()) == null) {
             this.tracers.put(tracerName.toLowerCase(), tracer);
+        }
+    }
+
+    private void loadTracers() throws ClassNotFoundException, IllegalAccessException, InstantiationException
+            , InvalidConfigurationException {
+        for (TracerConfig tracerConfig : this.openTracingConfig.getTracers()) {
+            if (tracerConfig.isEnabled()) {
+                Class<?> openTracerClass = Class.forName(tracerConfig.getClassName()).asSubclass(OpenTracer.class);
+                OpenTracer openTracer = (OpenTracer) openTracerClass.newInstance();
+                Tracer tracer = openTracer.getTracer(tracerConfig.getName(),
+                        tracerConfig.getConfiguration());
+                register(tracerConfig.getName(), tracer);
+            }
         }
     }
 
@@ -149,7 +171,8 @@ public class OpenTracerFactory {
                     spanBuilder = spanBuilder.asChildOf((BaseSpan) spanContextEntry.getValue());
                 } else {
                     throw new UnknownSpanContextTypeException("Unknown span context field - " +
-                            spanContextEntry.getValue().getClass() + "! Open tracing can span can be build only by using "
+                            spanContextEntry.getValue().getClass()
+                            + "! Open tracing can span can be build only by using "
                             + SpanContext.class + " or " + BaseSpan.class);
                 }
             }
@@ -199,7 +222,8 @@ public class OpenTracerFactory {
             if (parentSpan instanceof ActiveSpan) {
                 ((ActiveSpan) parentSpan).capture().activate();
             } else {
-                throw new UnknownSpanContextTypeException("Only " + ActiveSpan.class + " as parent span can be captured " +
+                throw new UnknownSpanContextTypeException("Only " + ActiveSpan.class
+                        + " as parent span can be captured " +
                         "and activated! But found " + parentSpan.getClass());
             }
         }
