@@ -23,6 +23,9 @@ import org.wso2.carbon.config.annotation.Element;
 
 import java.util.Set;
 
+/**
+ * This is the configuration class which holds the list of tracers configured.
+ */
 
 @Configuration(namespace = "wso2.msf4j.opentracing.configuration", description = "MSF4J Open Tracing configuration")
 public class OpenTracingConfig {

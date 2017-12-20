@@ -17,9 +17,13 @@
 */
 package org.wso2.msf4j.opentracing.core;
 
-public class UnknownSpanContextTypeException extends RuntimeException{
+/**
+ * This is the exception class which is thrown when the span context is unknown for
+ * {@link OpenTracerFactory}
+ */
+public class UnknownSpanContextTypeException extends RuntimeException {
 
-    public UnknownSpanContextTypeException(String ex){
+    public UnknownSpanContextTypeException(String ex) {
         super(ex);
     }
 }

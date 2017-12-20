@@ -17,9 +17,13 @@
 */
 package org.wso2.msf4j.opentracing.core.config;
 
+/**
+ * This is the exception class which is thrown for any unexpected/wrong
+ * configuration in the open tracer configs.
+ */
 public class InvalidConfigurationException extends Exception {
 
-    public InvalidConfigurationException(String ex){
+    public InvalidConfigurationException(String ex) {
         super(ex);
     }
 }

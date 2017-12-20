@@ -49,7 +49,7 @@ public class JaegerOpenTracingConfigTest {
         instanceField.set(OpenTracerFactory.class, openTracerFactoryInstance);
     }
 
-    @Test (description = "Load opentracing jaeger config with all default params configured")
+    @Test(description = "Load opentracing jaeger config with all default params configured")
     public void loadConfigWithAllParams() throws URISyntaxException, InvocationTargetException, NoSuchMethodException,
             NoSuchFieldException, InstantiationException, IllegalAccessException, InvalidConfigurationException {
         setup("deployment.yaml");
@@ -59,7 +59,7 @@ public class JaegerOpenTracingConfigTest {
         validateConfigs(tracerConfig.getConfiguration(), "const", 1, true, "localhost", 16686, 1000, 1000);
     }
 
-    @Test (dependsOnMethods = "loadConfigWithAllParams", description = "Load opentracing jaeger config with custom " +
+    @Test(dependsOnMethods = "loadConfigWithAllParams", description = "Load opentracing jaeger config with custom " +
             "params configured")
     public void loadConfigWithCustomParams() throws URISyntaxException, InvocationTargetException,
             NoSuchMethodException, NoSuchFieldException, InstantiationException, IllegalAccessException {
@@ -70,7 +70,7 @@ public class JaegerOpenTracingConfigTest {
         validateConfigs(tracerConfig.getConfiguration(), "const", 2, false, "127.0.0.1", 1886, 10000, 100);
     }
 
-    @Test (dependsOnMethods = "loadConfigWithCustomParams", description = "Load opentracing jaeger config with " +
+    @Test(dependsOnMethods = "loadConfigWithCustomParams", description = "Load opentracing jaeger config with " +
             "no params configured")
     public void loadConfigWithNoParams() throws URISyntaxException, InvocationTargetException, NoSuchMethodException,
             NoSuchFieldException, InstantiationException, IllegalAccessException {
@@ -85,7 +85,7 @@ public class JaegerOpenTracingConfigTest {
     }
 
     private void validateConfigs(Properties properties, String samplerType, int samplerParam, boolean logSpans,
-                                 String hostname, int port, int flushInterval, int maxBuffer){
+                                 String hostname, int port, int flushInterval, int maxBuffer) {
         Assert.assertEquals(properties.get(Constants.SAMPLER_TYPE_CONFIG), samplerType);
         Assert.assertEquals(properties.get(Constants.SAMPLER_PARAM_CONFIG), samplerParam);
         Assert.assertEquals(properties.get(Constants.REPORTER_LOG_SPANS_CONFIG), logSpans);

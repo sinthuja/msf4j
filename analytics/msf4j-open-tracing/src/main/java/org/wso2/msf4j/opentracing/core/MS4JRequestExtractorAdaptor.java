@@ -25,6 +25,10 @@ import java.util.List;
 import java.util.Map;
 import javax.ws.rs.core.HttpHeaders;
 
+/**
+ * This is the class is responsible to extract the {@link io.opentracing.SpanContext}
+ * from {@link Request} headers for the open tracing standard.
+ */
 public class MS4JRequestExtractorAdaptor implements TextMap {
     private Request request;
 
@@ -42,7 +46,7 @@ public class MS4JRequestExtractorAdaptor implements TextMap {
         throw new UnsupportedOperationException("This class should be used only with Tracer.extract()!");
     }
 
-    private class RequestIterator implements Iterator<Map.Entry<String, String>> {
+    private static class RequestIterator implements Iterator<Map.Entry<String, String>> {
         private Iterator<Map.Entry<String, List<String>>> iterator;
 
         private RequestIterator(HttpHeaders headers) {
@@ -60,7 +64,7 @@ public class MS4JRequestExtractorAdaptor implements TextMap {
             return new HeaderEntry(header.getKey(), header.getValue().get(0));
         }
 
-        public class HeaderEntry implements Map.Entry<String, String> {
+        public static class HeaderEntry implements Map.Entry<String, String> {
             private String key;
             private String value;
 

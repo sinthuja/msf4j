@@ -25,7 +25,7 @@
         <relativePath>../../poms/parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>jeager-tracing</artifactId>
+    <artifactId>jaeger-tracing</artifactId>
     <packaging>bundle</packaging>
 
     <name>WSO2 MSF4J Jaeger Tracing</name>
@@ -49,6 +49,11 @@
         <dependency>
             <groupId>com.uber.jaeger</groupId>
             <artifactId>jaeger-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uber.jaeger</groupId>
+            <artifactId>jaeger-thrift</artifactId>
+            <version>0.21.0</version>
         </dependency>
     </dependencies>
 

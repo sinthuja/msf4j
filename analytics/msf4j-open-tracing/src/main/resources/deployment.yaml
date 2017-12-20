@@ -33,6 +33,12 @@ wso2.msf4j.http.monitoring.configuration:
         # The path for Data Bridge Agent configuration
       dataAgentConfigPath: data-agent-config.xml
 
+wso2.msf4j.interceptor.configuration:
+    request:
+      - name: org.wso2.msf4j.opentracing.core.OpenTracingInterceptor
+    response:
+      - name: org.wso2.msf4j.opentracing.core.OpenTracingInterceptor
+
 wso2.msf4j.opentracing.configuration:
 
   tracers:

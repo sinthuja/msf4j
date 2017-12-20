@@ -22,6 +22,10 @@ import org.wso2.carbon.config.annotation.Element;
 
 import java.util.Properties;
 
+/**
+ * This is the configuration class which provides the configuration for a specific tracer.
+ */
+
 @Configuration(description = "Tracer Configuration")
 public class TracerConfig {
 

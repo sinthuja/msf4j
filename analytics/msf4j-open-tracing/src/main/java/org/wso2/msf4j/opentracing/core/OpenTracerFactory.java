@@ -42,16 +42,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import static org.wso2.msf4j.internal.MSF4JConstants.DEPLOYMENT_YAML_FILE;
 import static org.wso2.msf4j.internal.MSF4JConstants.DEPLOYMENT_YAML_SYS_PROPERTY;
 
+/**
+ * This is the class which holds the tracers that are enabled, and bridges all tracers with instrumented code.
+ */
 public class OpenTracerFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(OpenTracerFactory.class);
-    private static OpenTracerFactory instance;
+    private static OpenTracerFactory instance = new OpenTracerFactory();
     private OpenTracingConfig openTracingConfig;
     private Map<String, Tracer> tracers;
 
@@ -67,14 +71,8 @@ public class OpenTracerFactory {
         }
     }
 
+
     public static OpenTracerFactory getInstance() {
-        if (instance == null){
-            synchronized (OpenTracerFactory.class) {
-                if (instance == null) {
-                    instance = new OpenTracerFactory();
-                }
-            }
-        }
         return instance;
     }
 
@@ -88,8 +86,8 @@ public class OpenTracerFactory {
 
     private void register(String tracerName, Tracer tracer) {
         TracerConfig tracerConfig = getTracingConfig(tracerName);
-        if (tracerConfig.isEnabled() && this.tracers.get(tracerName.toLowerCase()) == null) {
-            this.tracers.put(tracerName.toLowerCase(), tracer);
+        if (tracerConfig.isEnabled() && this.tracers.get(tracerName.toLowerCase(Locale.ENGLISH)) == null) {
+            this.tracers.put(tracerName.toLowerCase(Locale.ENGLISH), tracer);
         }
     }
 
@@ -201,7 +199,8 @@ public class OpenTracerFactory {
     public Map<String, ActiveSpan> getActiveSpans(Set<String> tracerNames) {
         Map<String, ActiveSpan> activeSpanMap = new HashMap<>();
         for (String tracerName : tracerNames) {
-            activeSpanMap.put(tracerName.toLowerCase(), this.tracers.get(tracerName.toLowerCase()).activeSpan());
+            activeSpanMap.put(tracerName.toLowerCase(Locale.ENGLISH),
+                    this.tracers.get(tracerName.toLowerCase(Locale.ENGLISH)).activeSpan());
         }
         return activeSpanMap;
     }
@@ -219,12 +218,14 @@ public class OpenTracerFactory {
     public void finishSpan(List<Span> span, Map<String, Object> parent) {
         finishSpan(span);
         for (Map.Entry<String, Object> parentSpan : parent.entrySet()) {
-            if (parentSpan instanceof ActiveSpan) {
-                ((ActiveSpan) parentSpan).capture().activate();
-            } else {
-                throw new UnknownSpanContextTypeException("Only " + ActiveSpan.class
-                        + " as parent span can be captured " +
-                        "and activated! But found " + parentSpan.getClass());
+            if (parentSpan.getValue() != null) {
+                if (parentSpan.getValue() instanceof ActiveSpan) {
+                    ((ActiveSpan) parentSpan.getValue()).capture().activate();
+                } else {
+                    throw new UnknownSpanContextTypeException("Only " + ActiveSpan.class
+                            + " as parent span can be captured " +
+                            "and activated! But found " + parentSpan.getClass());
+                }
             }
         }
     }

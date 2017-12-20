@@ -18,7 +18,6 @@
 package org.wso2.msf4j.opentracing.core;
 
 import io.opentracing.Span;
-import io.opentracing.SpanContext;
 import io.opentracing.propagation.Format;
 import io.opentracing.tag.Tags;
 import org.wso2.msf4j.Request;
@@ -26,23 +25,20 @@ import org.wso2.msf4j.Response;
 import org.wso2.msf4j.interceptor.RequestInterceptor;
 import org.wso2.msf4j.interceptor.ResponseInterceptor;
 
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
+/**
+ * This is the open tracing interceptors that will be attached globally in the
+ * {@link org.wso2.msf4j.MicroservicesRunner}
+ */
 public class OpenTracingInterceptor implements RequestInterceptor, ResponseInterceptor {
 
-    private static OpenTracingInterceptor INSTANCE = new OpenTracingInterceptor();
     private static final String REQUEST_SPAN = "REQUEST_SPAN";
     private OpenTracerFactory openTracerFactory;
 
-    private OpenTracingInterceptor() {
+    public OpenTracingInterceptor() {
         this.openTracerFactory = OpenTracerFactory.getInstance();
-    }
-
-    public static OpenTracingInterceptor getInstance() throws Exception {
-        return INSTANCE;
     }
 
     @Override

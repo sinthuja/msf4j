@@ -17,6 +17,9 @@
 */
 package org.wso2.msf4j.opentracing.core;
 
+/**
+ * Constants class which defines all the constants defined.
+ */
 public class Constants {
 
     public static final String OPEN_TRACING_NAME = "WSO2 MSF4J";

@@ -45,7 +45,6 @@ import static org.wso2.msf4j.opentracing.jaeger.Constants.SAMPLER_TYPE_CONFIG;
 /**
  * This is the open tracing extension class for {@link OpenTracer}
  */
-
 public class JaegerOpenTracingExtension implements OpenTracer {
 
     private static final Logger logger = LoggerFactory.getLogger(JaegerOpenTracingExtension.class);
@@ -60,14 +59,15 @@ public class JaegerOpenTracingExtension implements OpenTracer {
         validateConfiguration(configProperties);
         return new com.uber.jaeger.Configuration(
                 org.wso2.msf4j.opentracing.core.Constants.OPEN_TRACING_NAME,
-                new com.uber.jaeger.Configuration.SamplerConfiguration((String) configProperties.get(SAMPLER_TYPE_CONFIG)
+                new com.uber.jaeger.Configuration.SamplerConfiguration(
+                        (String) configProperties.get(SAMPLER_TYPE_CONFIG)
                         , (Integer) configProperties.get(SAMPLER_PARAM_CONFIG)),
                 new com.uber.jaeger.Configuration.ReporterConfiguration(
                         (Boolean) configProperties.get(REPORTER_LOG_SPANS_CONFIG),
                         (String) configProperties.get(REPORTER_HOST_NAME_CONFIG),
-                        (Integer)configProperties.get(REPORTER_PORT_CONFIG),
-                        (Integer)configProperties.get(REPORTER_FLUSH_INTERVAL_MS_CONFIG),
-                        (Integer)configProperties.get(REPORTER_MAX_BUFFER_SPANS_CONFIG))
+                        (Integer) configProperties.get(REPORTER_PORT_CONFIG),
+                        (Integer) configProperties.get(REPORTER_FLUSH_INTERVAL_MS_CONFIG),
+                        (Integer) configProperties.get(REPORTER_MAX_BUFFER_SPANS_CONFIG))
         ).getTracer();
     }
 
