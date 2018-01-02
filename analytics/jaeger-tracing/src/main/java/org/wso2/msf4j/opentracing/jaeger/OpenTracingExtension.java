@@ -45,9 +45,9 @@ import static org.wso2.msf4j.opentracing.jaeger.Constants.SAMPLER_TYPE_CONFIG;
 /**
  * This is the open tracing extension class for {@link OpenTracer}
  */
-public class JaegerOpenTracingExtension implements OpenTracer {
+public class OpenTracingExtension implements OpenTracer {
 
-    private static final Logger logger = LoggerFactory.getLogger(JaegerOpenTracingExtension.class);
+    private static final Logger logger = LoggerFactory.getLogger(OpenTracingExtension.class);
 
     @Override
     public Tracer getTracer(String tracerName, Properties configProperties) throws InvalidConfigurationException {

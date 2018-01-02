@@ -36,14 +36,9 @@ wso2.msf4j.http.monitoring.configuration:
 wso2.msf4j.opentracing.configuration:
 
   tracers:
-    - name: jaeger
+    - name: zipkin
       enabled: true
-      className: org.wso2.msf4j.opentracing.jaeger.OpenTracingExtension
+      className: org.wso2.msf4j.opentracing.zipkin.OpenTracingExtension
       configuration:
-        sampler.type: const
-        sampler.param: 2
-        reporter.log.spans: false
-        reporter.hostname: 127.0.0.1
-        reporter.port: 1886
-        reporter.flush.interval.ms: 10000
-        reporter.max.buffer.spans: 100
+        reporter.hostname: localhost
+        reporter.port: 9411

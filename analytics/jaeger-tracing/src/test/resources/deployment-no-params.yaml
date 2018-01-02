@@ -38,4 +38,4 @@ wso2.msf4j.opentracing.configuration:
   tracers:
     - name: jaeger
       enabled: true
-      className: org.wso2.msf4j.opentracing.jaeger.JaegerOpenTracingExtension
+      className: org.wso2.msf4j.opentracing.jaeger.OpenTracingExtension
