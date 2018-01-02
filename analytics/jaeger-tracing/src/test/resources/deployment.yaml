@@ -44,6 +44,6 @@ wso2.msf4j.opentracing.configuration:
         sampler.param: 1
         reporter.log.spans: true
         reporter.hostname: localhost
-        reporter.port: 16686
+        reporter.port: 5775
         reporter.flush.interval.ms: 1000
         reporter.max.buffer.spans: 1000
