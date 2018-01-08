@@ -56,7 +56,7 @@ public class JaegerOpenTracingConfigTest {
         OpenTracerFactory config = OpenTracerFactory.getInstance();
         TracerConfig tracerConfig = config.getTracingConfig(Constants.JAEGER_TRACER_NAME);
         Assert.assertTrue(tracerConfig != null);
-        validateConfigs(tracerConfig.getConfiguration(), "const", 1, true, "localhost", 16686, 1000, 1000);
+        validateConfigs(tracerConfig.getConfiguration(), "const", 1, true, "localhost", 5775, 1000, 1000);
     }
 
     @Test(dependsOnMethods = "loadConfigWithAllParams", description = "Load opentracing jaeger config with custom " +

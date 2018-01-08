@@ -31,7 +31,7 @@ public interface OpenTracer {
      * Returns the specific tracer implementation of the analytics engine based
      * on the configuration provided.
      *
-     * @param tracerName name of the tracer
+     * @param tracerName       name of the tracer
      * @param configProperties The configuration of the tracer
      * @return Specific {@link Tracer} instance throws {@link InvalidConfigurationException}
      * if the configuration or tracer name is invalid.

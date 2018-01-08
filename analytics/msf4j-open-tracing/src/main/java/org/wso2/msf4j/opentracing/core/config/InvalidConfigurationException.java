@@ -23,7 +23,11 @@ package org.wso2.msf4j.opentracing.core.config;
  */
 public class InvalidConfigurationException extends Exception {
 
-    public InvalidConfigurationException(String ex) {
-        super(ex);
+    public InvalidConfigurationException(String msg) {
+        super(msg);
+    }
+
+    public InvalidConfigurationException(String msg, Exception ex) {
+        super(msg, ex);
     }
 }
