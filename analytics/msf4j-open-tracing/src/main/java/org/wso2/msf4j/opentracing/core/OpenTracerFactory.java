@@ -155,13 +155,15 @@ public class OpenTracerFactory {
         return spanContext;
     }
 
-    public List<Span> buildSpan(String spanName, Map<String, Object> spanContextMap, String spanTag,
-                                String spanTagValue, boolean makeActive) {
+    public List<Span> buildSpan(String spanName, Map<String, Object> spanContextMap, Map<String, String> tags,
+                                boolean makeActive) {
         List<Span> spanList = new ArrayList<>();
         for (Map.Entry spanContextEntry : spanContextMap.entrySet()) {
             Tracer tracer = this.tracers.get(spanContextEntry.getKey().toString());
-            Tracer.SpanBuilder spanBuilder = tracer.buildSpan(spanName)
-                    .withTag(spanTag, spanTagValue);
+            Tracer.SpanBuilder spanBuilder = tracer.buildSpan(spanName);
+            for (Map.Entry<String, String> tag : tags.entrySet()) {
+                spanBuilder = spanBuilder.withTag(tag.getKey(), tag.getValue());
+            }
             if (spanContextEntry.getValue() != null) {
                 if (spanContextEntry.getValue() instanceof SpanContext) {
                     spanBuilder = spanBuilder.asChildOf((SpanContext) spanContextEntry.getValue());

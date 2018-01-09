@@ -57,9 +57,19 @@ wso2.msf4j.opentracing.configuration:
         reporter.max.buffer.spans: 1000
 
     - name: zipkin
-      enabled: true
+      enabled: false
       className: org.wso2.msf4j.opentracing.zipkin.OpenTracingExtension
       configuration:
         reporter.hostname: localhost
         reporter.port: 9411
 
+    - name: wso2-analytics
+      enabled: true
+      className: org.wso2.carbon.open.tracer.AnalyticsTracerExtension
+      configuration:
+        publisher.type: thrift
+        username: admin
+        password: admin
+        url: tcp://localhost:7614
+        authUrl: ssl://localhost:7714
+        component.name: WSO2 MSF4J

@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
 *  in compliance with the License.
@@ -17,12 +17,20 @@
 */
 package org.wso2.msf4j.opentracing.core;
 
-/**
- * Constants class which defines all the constants defined.
- */
-public class Constants {
+import java.net.URISyntaxException;
 
-    public static final String OPEN_TRACING_NAME = "WSO2 MSF4J";
-    public static final String CONTEXT_NAME_TAG = "service.context";
-    public static final String RESOURCE_OP_NAME_TAG = "operation.name";
+/**
+ * This is the Utils class which has the common thread safe public methods which can be shared by multiple components.
+ */
+public class Utils {
+
+    public static String getServiceName(String requestUri) throws URISyntaxException {
+        String[] paths = requestUri.split("/");
+        for (String path : paths) {
+            if (path != null && !path.trim().isEmpty()) {
+                return path;
+            }
+        }
+        return "";
+    }
 }

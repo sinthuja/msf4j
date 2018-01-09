@@ -16,6 +16,7 @@
 
 package org.wso2.msf4j.example;
 
+import org.wso2.carbon.databridge.agent.AgentHolder;
 import org.wso2.msf4j.MicroservicesRunner;
 import org.wso2.msf4j.example.exception.CustomerNotFoundMapper;
 import org.wso2.msf4j.example.exception.EntityNotFoundMapper;
@@ -34,8 +35,14 @@ import java.net.URL;
  */
 public class Application {
     public static void main(String[] args) throws Exception {
+        System.setProperty("javax.net.ssl.trustStore",
+                "/Users/sinthu/wso2/sources/dev/git/sinthuja/msf4j2/msf4j/samples/message-tracing/open-tracing/src/main/resources/wso2carbon.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
+        URL resource = Application.class.getResource(File.separator + "data.agent.config.yaml");
+        AgentHolder.setConfigPath(new File(resource.toURI().getPath()).getAbsolutePath());
 
-        URL resource = Application.class.getResource(File.separator + "deployment.yaml");
+
+        resource = Application.class.getResource(File.separator + "deployment.yaml");
         System.setProperty(MSF4JConstants.DEPLOYMENT_YAML_SYS_PROPERTY,
                 new File(resource.toURI().getPath()).getAbsolutePath());
 

@@ -25,9 +25,11 @@ import io.opentracing.Span;
 import io.opentracing.propagation.Format;
 import io.opentracing.tag.Tags;
 import org.wso2.msf4j.client.FeignClientWrapper;
+import org.wso2.msf4j.opentracing.core.Constants;
 import org.wso2.msf4j.opentracing.core.OpenTracerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,9 +52,12 @@ public class FeignOpenTracingClient extends FeignClientWrapper {
     public Response execute(Request request, Request.Options options) throws IOException {
         if (this.openTracerFactory.isTracingEnabled()) {
             Map<String, Object> parentSpan = this.openTracerFactory.getActiveSpans();
+            Map<String, String> tags = new HashMap<>();
+            tags.put(Tags.SPAN_KIND.getKey(), "client-send");
+            tags.put(Constants.CONTEXT_NAME_TAG, request.url());
+            tags.put(Constants.RESOURCE_OP_NAME_TAG, request.method());
             List<Span> span = this.openTracerFactory.
-                    buildSpan(instanceName + "##" + request.url() + "##" + request.method(), parentSpan,
-                            Tags.SPAN_KIND.getKey(), "client-send", true);
+                    buildSpan(instanceName, parentSpan, tags, true);
             Map<String, ActiveSpan> activeSpanMap = this.openTracerFactory.getActiveSpans(parentSpan.keySet());
             MS4JRequestInjectorAdaptor requestInjectorAdaptor = new MS4JRequestInjectorAdaptor(request);
             this.openTracerFactory.inject(activeSpanMap, Format.Builtin.HTTP_HEADERS, requestInjectorAdaptor);
