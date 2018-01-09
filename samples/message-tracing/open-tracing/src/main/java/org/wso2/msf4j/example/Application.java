@@ -28,6 +28,7 @@ import org.wso2.msf4j.example.service.ReportService;
 import org.wso2.msf4j.internal.MSF4JConstants;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -35,16 +36,11 @@ import java.net.URL;
  */
 public class Application {
     public static void main(String[] args) throws Exception {
-        System.setProperty("javax.net.ssl.trustStore",
-                "/Users/sinthu/wso2/sources/dev/git/sinthuja/msf4j2/msf4j/samples/message-tracing/open-tracing/src/main/resources/wso2carbon.jks");
+
+        System.setProperty("javax.net.ssl.trustStore", getAbsolutePathOfResource("wso2carbon.jks"));
         System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
-        URL resource = Application.class.getResource(File.separator + "data.agent.config.yaml");
-        AgentHolder.setConfigPath(new File(resource.toURI().getPath()).getAbsolutePath());
-
-
-        resource = Application.class.getResource(File.separator + "deployment.yaml");
-        System.setProperty(MSF4JConstants.DEPLOYMENT_YAML_SYS_PROPERTY,
-                new File(resource.toURI().getPath()).getAbsolutePath());
+        AgentHolder.setConfigPath(getAbsolutePathOfResource("data.agent.config.yaml"));
+        System.setProperty(MSF4JConstants.DEPLOYMENT_YAML_SYS_PROPERTY, getAbsolutePathOfResource("deployment.yaml"));
 
         new MicroservicesRunner(8081)
                 .addExceptionMapper(new EntityNotFoundMapper(), new CustomerNotFoundMapper(), new
@@ -63,5 +59,10 @@ public class Application {
                         InvoiceNotFoundMapper(), new GenericServerErrorMapper())
                 .deploy(new ReportService())
                 .start();
+    }
+
+    private static String getAbsolutePathOfResource(String fileName) throws URISyntaxException {
+        URL resource = Application.class.getResource(File.separator + fileName);
+        return new File(resource.toURI().getPath()).getAbsolutePath();
     }
 }

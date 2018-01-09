@@ -123,9 +123,9 @@ wso2.securevault:
     type: org.wso2.carbon.secvault.repository.DefaultSecretRepository
     parameters:
       privateKeyAlias: wso2carbon
-      keystoreLocation: /Users/sinthu/wso2/sources/dev/git/sinthuja/msf4j2/msf4j/samples/message-tracing/open-tracing/src/main/resources/wso2carbon.jks
-      secretPropertiesFile: /Users/sinthu/wso2/sources/dev/git/sinthuja/msf4j2/msf4j/samples/message-tracing/open-tracing/src/main/resources/secrets.properties
+      keystoreLocation: samples/message-tracing/open-tracing/target/classes/wso2carbon.jks
+      secretPropertiesFile: samples/message-tracing/open-tracing/target/classes/secrets.properties
   masterKeyReader:
     type: org.wso2.carbon.secvault.reader.DefaultMasterKeyReader
     parameters:
-      masterKeyReaderFile: /Users/sinthu/wso2/sources/dev/git/sinthuja/msf4j2/msf4j/samples/message-tracing/open-tracing/src/main/resources/master-keys.yaml
+      masterKeyReaderFile: samples/message-tracing/open-tracing/target/classes/master-keys.yaml
