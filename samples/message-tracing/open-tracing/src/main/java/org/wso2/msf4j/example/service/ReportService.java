@@ -47,7 +47,6 @@ public class ReportService {
     private static final Logger log = LoggerFactory.getLogger(ReportService.class);
     private static final String CUSTOMER_SERVICE_URL = "http://localhost:8081";
     private static final String INVOICE_SERVICE_URL = "http://localhost:8082";
-    private static final String DAS_RECEIVER_URL = "http://localhost:9763/endpoints/msf4jtracereceiver";
     private final MSF4JClient<CustomerServiceAPI> customerServiceClient;
     private final MSF4JClient<InvoiceServiceAPI> invoiceServiceClient;
 

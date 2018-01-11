@@ -35,8 +35,8 @@ import java.net.URL;
  * Application entry point.
  */
 public class Application {
-    public static void main(String[] args) throws Exception {
 
+    public static void main(String[] args) throws Exception {
         System.setProperty("javax.net.ssl.trustStore", getAbsolutePathOfResource("wso2carbon.jks"));
         System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
         AgentHolder.setConfigPath(getAbsolutePathOfResource("data.agent.config.yaml"));
