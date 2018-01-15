@@ -57,7 +57,7 @@ public class FeignOpenTracingClient extends FeignClientWrapper {
             tags.put(Constants.CONTEXT_NAME_TAG, request.url());
             tags.put(Constants.RESOURCE_OP_NAME_TAG, request.method());
             List<Span> span = this.openTracerFactory.
-                    buildSpan(instanceName, parentSpan, tags, true);
+                    buildSpan("Client :- " + instanceName, parentSpan, tags, true);
             Map<String, ActiveSpan> activeSpanMap = this.openTracerFactory.getActiveSpans(parentSpan.keySet());
             MS4JRequestInjectorAdaptor requestInjectorAdaptor = new MS4JRequestInjectorAdaptor(request);
             this.openTracerFactory.inject(activeSpanMap, Format.Builtin.HTTP_HEADERS, requestInjectorAdaptor);

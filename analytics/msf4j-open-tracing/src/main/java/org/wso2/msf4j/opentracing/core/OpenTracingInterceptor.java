@@ -24,6 +24,7 @@ import org.wso2.msf4j.Request;
 import org.wso2.msf4j.Response;
 import org.wso2.msf4j.interceptor.RequestInterceptor;
 import org.wso2.msf4j.interceptor.ResponseInterceptor;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class OpenTracingInterceptor implements RequestInterceptor, ResponseInter
             tags.put(Tags.SPAN_KIND.getKey(), "server-receive");
             tags.put(Constants.CONTEXT_NAME_TAG, request.getUri());
             tags.put(Constants.RESOURCE_OP_NAME_TAG, request.getHttpMethod());
-            List<Span> span = this.openTracerFactory.buildSpan(Utils.getServiceName(request.getUri()),
+            List<Span> span = this.openTracerFactory.buildSpan("Service :- " + Utils.getServiceName(request.getUri()),
                     spanContext, tags, true);
             request.setProperty(REQUEST_SPAN, span);
         }
